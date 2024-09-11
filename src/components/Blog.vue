@@ -1,18 +1,13 @@
 
-
 <script setup>
 import {ref} from 'vue'
+import { createNewBlog } from '../stores/publishBlog'
 
 const blogSubject = ref('');
 const blogBody = ref('');
-let blogs = [];
-const postBlog = () => {
-    const keyls = blogSubject.value;
-    const valls = blogBody.value;
-    blogs.push([keyls, valls]);
-    console.log(blogs );
 
-   
+const postBlog = () => {
+    createNewBlog(blogSubject.value, blogBody.value);
 };
 
 

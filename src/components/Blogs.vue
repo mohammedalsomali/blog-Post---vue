@@ -1,8 +1,9 @@
 <script setup>
 import {ref, onMounted} from 'vue'
-import blogs  from './Blog.vue'
+import { blogs } from '../stores/publishBlog'
 
 
+    const val = ref('');
     console.log(blogs);
 
 </script>
@@ -11,7 +12,8 @@ import blogs  from './Blog.vue'
 <template>
     <ul>
         <article v-for="blog in blogs">
-          {{ blog }}
+          <header> {{ blog.subject }}</header>
+          <p> {{ blog.body }}</p>
         </article>
     </ul>
 </template>
