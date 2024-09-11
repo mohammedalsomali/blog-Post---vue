@@ -1,29 +1,29 @@
+
+
 <script setup>
-    import {ref} from 'vue'
-    const blogSubject = ref('subject');
-    const blogBody = ref('blogBody');
-    const blogs = [{
-        'subject': blogSubject.value,
-        'body': blogBody.value
-        }];
-    const postBlog = () => {
-        const blog = {
-        'subject': blogSubject.value,
-        'body': blogBody.value
-        };
-        blogs.push(blog);
-    };
+import {ref} from 'vue'
 
-    // export default  blogs;
+const blogSubject = ref('');
+const blogBody = ref('');
+let blogs = [];
+const postBlog = () => {
+    const keyls = blogSubject.value;
+    const valls = blogBody.value;
+    blogs.push([keyls, valls]);
+    console.log(blogs );
 
-    
+   
+};
+
+
+
 </script>
 
 <template>
     <div class="blogContainer">
-        <form @click.prevent="postBlog">
-            <input type="text" class="blogSubject" v-bind:value="blogSubject">
-            <textarea name="blogBody" maxlength="255" :value="blogBody"> 
+        <form @submit.prevent="postBlog">
+            <input type="text" class="blogSubject" v-model="blogSubject">
+            <textarea name="blogBody" maxlength="255" v-model="blogBody"> 
 
             </textarea>
             <input type="submit">
