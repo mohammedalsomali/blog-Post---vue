@@ -1,13 +1,22 @@
 <script setup>
-//   import blogContainer from '/Users/mohammed/Blog Post - Vue/blog Post - vue/src/components/Blog.vue'
+import { ref } from 'vue'
+
+const redon  = ref('red');
+const addBlog = () => {
+  console.log('1');
+  redon.value = 'yellow';
+  console.log(redon);
+}
 </script>
 
 <template>
   <main>
-      <form action="">
+      <form @submit.prevent="addBlog" :style="{ 'background-color': redon }">
             <input type="text" required>
             <input type="text" required>
-            <input type="button" value="Login">
+            <input type="submit" value="Login">
       </form>
   </main>
 </template>
+
+

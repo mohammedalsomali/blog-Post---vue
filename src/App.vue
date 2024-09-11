@@ -12,10 +12,13 @@
                 <li>
                     <router-link :to="{ name: 'login' }"> Login </router-link>
                 </li>
+                <li>
+                    <router-link :to="{ name: 'Blog' }"> blog </router-link>
+                </li>
             </ul>
         </nav>
-        <router-View />
     </div>
+    <router-View />
 
 </template>
 
@@ -24,9 +27,8 @@
 nav {
     background-color: black;
     width: 100%;
-    position: absolute;
-    top: 0px;
-    left: 0px;
+    height: 10%;
+
 }
 
 ul {

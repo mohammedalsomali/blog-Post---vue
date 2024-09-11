@@ -1,11 +1,11 @@
 
 
 <script setup>
-  import blogContainer from '/Users/mohammed/Blog Post - Vue/blog Post - vue/src/components/Blog.vue'
+import blogs from '../components/Blogs.vue'
 </script>
 
 <template>
   <main>
-      <blogContainer /> 
+      <blogs />
   </main>
 </template>
