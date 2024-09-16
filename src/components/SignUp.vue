@@ -19,7 +19,7 @@
         <input
           class="shadow appearance-none border border-red-500 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
           id="password" type="password" placeholder="******************">
-        <p class="text-red-500 text-xs italic">Please make a choose a password</p>
+        <p class="text-red-500 text-xs italic">Please make a password</p>
       </div>
       <div class="mb-6">
         <label class="block text-gray-700 text-sm font-bold mb-2" for="password">
@@ -30,15 +30,13 @@
           id="password" type="password" placeholder="******************">
         <p class="text-red-500 text-xs italic">Please confirm the password</p>
       </div>
-      <div class="flex items-center justify-between">
+      <div class="flex items-center justify-center">
         <button
           class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
           type="button">
-          Sign In
+          Sign Up
         </button>
-        <a class="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800" href="#">
-          Forgot Password?
-        </a>
+        
       </div>
     </form>
   </div>

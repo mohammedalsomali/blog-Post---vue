@@ -1,6 +1,5 @@
 <script setup>
 import { ref } from 'vue'
-import login from '../components/Login.vue'
 import SignUp from '../components/SignUp.vue'
 
 
@@ -8,8 +7,8 @@ import SignUp from '../components/SignUp.vue'
 
 <template>
   
-  <login />
   <SignUp />
+
 </template>
 
 
