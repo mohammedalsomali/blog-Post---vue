@@ -15,10 +15,10 @@ const postBlog = () => {
 </script>
 
 <template>
-    <div class="blogContainer">
-        <form @submit.prevent="postBlog">
-            <input type="text" class="blogSubject" v-model="blogSubject">
-            <textarea name="blogBody" maxlength="255" v-model="blogBody"> 
+    <div class="container h-lvh">
+        <form @submit.prevent="postBlog" class="flex flex-col w-1/2 h-2">
+            <input type="text" class="rounded-md" v-model="blogSubject">
+            <textarea class="resize-none rounded-md" maxlength="255" v-model="blogBody"> 
 
             </textarea>
             <input type="submit">
@@ -30,13 +30,5 @@ const postBlog = () => {
 
 
 <style scoped>
-form {
-    height: 300px;
-    display: grid;
-    grid-template-columns: auto;
-}
-textarea{
-    background-color: aqua;
-    height: 255px;
-}
+
 </style>
