@@ -2,20 +2,22 @@
 
 </script>
 <template>
-    <nav class="flex items-center justify-between flex-wrap bg-teal-500 p-6">
-        <div class="flex text-sm lg:flex-grow">
-          <a class="block mt-4 lg:inline-block lg:mt-0 text-teal-200 mr-4">
-            <router-link :to="{ name: 'home' }"> Home </router-link>
-          </a>
-          <a class="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4">
-            <router-link :to="{ name: 'login' }"> Login
-            </router-link>
-          </a>
-          <a class="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white">
-            <router-link :to="{ name: 'Blog' }"> blog </router-link>
-          </a>
-        </div>
-        <div>
-      </div>
-    </nav>
+  <nav class="bg-white border-gray-200 dark:bg-green-900">
+    <div class="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl p-4">
+      <div class="flex items-center space-x-6 rtl:space-x-reverse">
+      <a class="flex items-center space-x-3 rtl:space-x-reverse">
+        <router-link :to="{ name: 'home' }"> Home </router-link>
+      </a>
+      <a class="flex items-center space-x-3 rtl:space-x-reverse">
+        <router-link :to="{ name: 'Blog' }"> blog </router-link>
+      </a>
+    </div>
+    <a class="text-sm  text-blue-600 dark:text-blue-500 hover:underline">
+      <router-link :to="{ name: 'login' }"> Login
+      </router-link>
+    </a>
+    </div>
+<div>
+    </div>
+  </nav>
 </template>

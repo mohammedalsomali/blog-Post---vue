@@ -10,10 +10,14 @@ import { blogs } from '../stores/publishBlog'
 
 
 <template>
-    <ul>
-        <article v-for="blog in blogs">
-          <header> {{ blog.subject }}</header>
-          <p> {{ blog.body }}</p>
-        </article>
-    </ul>
+
+    <div v-for="blog in blogs">
+        <div class="px-6 py-4">
+            <div class="font-bold text-xl mb-2">{{ blog.subject }}</div>
+            <p class="text-gray-700 text-base">
+                {{ blog.body }}
+            </p>
+        </div>
+    </div>
+
 </template>
