@@ -8,6 +8,10 @@ const blogBody = ref('');
 
 const postBlog = () => {
     createNewBlog(blogSubject.value, blogBody.value);
+    blogSubject.value = ''
+    blogBody.value = '';
+    
+    
 };
 
 
