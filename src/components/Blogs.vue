@@ -1,6 +1,9 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import { blogs } from '../stores/publishBlog'
+import { useCounterStore } from '@/stores/counter';
+
+const likes = useCounterStore();
 
 
 const val = ref('');
@@ -23,6 +26,11 @@ console.log(blogs);
                 </a>
                 <p class="mb-3 break-words font-normal text-gray-700 dark:text-gray-400"> {{ blog.body }}</p>
             </div>
+            <button @click="likes.increment" class="flex">
+                <svg class="mr-2 cursor-pointer hover:text-gray-700 border rounded-full p-1 h-7" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                <span> {{ likes.count }}</span>
+
+            </button>
         </div>
 
 
