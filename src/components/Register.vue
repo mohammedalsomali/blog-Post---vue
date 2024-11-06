@@ -1,4 +1,6 @@
 <script setup>
+import { useUserStore } from '@/stores/User';
+import { storeToRefs } from 'pinia';
 import pocketbase from 'pocketbase';
 import { computed, onMounted, ref } from 'vue';
 
@@ -8,26 +10,17 @@ const username = ref('');
 const password = ref('');
 const confirmPassword = ref('');
 
-const createUser = async () => {
-  pb = new pocketbase('http://127.0.0.1:8090');
+const createUser = useUserStore()
+  createUser.$patch({
+  username: username.value,
+  email: "",
+  emailVisibility: true,
+  password: password.value,
+  confirmPassword: confirmPassword.value,
+  nm: "test"
+  })
 
-  const data = {
-    "username": username.value,
-    "email": "",
-    "emailVisibility": true,
-    "password": password.value,
-    "passwordConfirm": confirmPassword.value,
-    "name": "test"
-  }
-  try {
-    await pb.collection('users').create(data);
-  } catch (error) {
-      console.log(error.response.data.password.message);
-  }
-  // const confirmation = await pb.collection('users').requestVerification(username);
-  // console.log(confirmation);
 
-}
 
 </script>
 
