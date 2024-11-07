@@ -1,6 +1,5 @@
 <script setup>
 import { useUserStore } from '@/stores/User';
-import { storeToRefs } from 'pinia';
 import pocketbase from 'pocketbase';
 import { computed, onMounted, ref } from 'vue';
 
@@ -10,15 +9,23 @@ const username = ref('');
 const password = ref('');
 const confirmPassword = ref('');
 
-const createUser = useUserStore()
-  createUser.$patch({
-  username: username.value,
-  email: "",
-  emailVisibility: true,
-  password: password.value,
-  confirmPassword: confirmPassword.value,
-  nm: "test"
-  })
+const createUser = useUserStore();
+
+
+
+const formCreate = () => {
+  const data = {
+    username: username.value,
+    email: '',
+    emailVisibility: true,
+    password: password.value,
+    passwordConfirm: confirmPassword.value,
+  };
+  createUser.updatestate(data);
+  createUser.newUser(data);
+
+}
+
 
 
 
@@ -26,7 +33,7 @@ const createUser = useUserStore()
 
 <template>
   <div class="h-full w-full flex flex-col items-center justify-center">
-    <form class="bg-white shadow-md max-w-xs rounded px-8 pt-6 pb-8 mb-4" @submit.prevent="createUser">
+    <form class="bg-white shadow-md max-w-xs rounded px-8 pt-6 pb-8 mb-4" @submit.prevent="formCreate">
       <div class="mb-4">
         <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
           Username
