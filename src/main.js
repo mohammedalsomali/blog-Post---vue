@@ -2,7 +2,6 @@ import './assets/main.css'
 
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
-import pocketbase from 'pocketbase';
 
 
 import App from './App.vue'

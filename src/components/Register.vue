@@ -1,6 +1,5 @@
 <script setup>
 import { useUserStore } from '@/stores/User';
-import pocketbase from 'pocketbase';
 import { computed, onMounted, ref } from 'vue';
 
 let pb = null;
@@ -13,18 +12,18 @@ const createUser = useUserStore();
 
 
 
-const formCreate = () => {
-  const data = {
-    username: username.value,
-    email: '',
-    emailVisibility: true,
-    password: password.value,
-    passwordConfirm: confirmPassword.value,
-  };
-  createUser.updatestate(data);
-  createUser.newUser(data);
+  const formCreate = () => {
+    const data = {
+      username: username.value,
+      email: '',
+      emailVisibility: true,
+      password: password.value,
+      passwordConfirm: confirmPassword.value,
+    };
+    createUser.updatestate(data);
+    createUser.newUser(data);
 
-}
+  }
 
 
 
