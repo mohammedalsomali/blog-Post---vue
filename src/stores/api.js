@@ -20,9 +20,10 @@ export const usePocketStore = defineStore('pbConnection', {
         
         async login(username, password){
             try {
-                const login = pb.collection('users').authWithPassword(username, password);
+                const login = await pb.collection('users').authWithPassword(username, password);
                 this.isAthenticated = true;
                 this.token = pb.authStore.token;
+                this.logout();
                 console.log(this.token);
             } catch (error) {
                 console.error(error);
@@ -31,16 +32,28 @@ export const usePocketStore = defineStore('pbConnection', {
 
 
         async logout() {
-
+        if(this.isAthenticated){
+            this.isAthenticated = false;
+            this.token = null;
+            this.user = null;
+            pb.authStore.clear();;
+        }
+            
         },
 
 
-        async registerUser() {
-
+        async registerUser(data) {
+            const newUser = await pb.collection('users').create(data);
         },
 
-        async getUserInfo(){
-
+        async updateUserInfo(){
+            if(!this.token){
+                return console.log('user not logedin');
+            }
+            const auth = await pb.collection('users').authRefresh({
+                GET: this.token
+            });
+            console.log(auth);
         },
 
         async getBlogs(){

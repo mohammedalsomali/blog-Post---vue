@@ -1,6 +1,6 @@
 <script setup>
-import { useUserStore } from '@/stores/User';
-import { computed, onMounted, ref } from 'vue';
+import { usePocketStore } from '@/stores/api';
+import { ref } from 'vue';
 
 let pb = null;
 
@@ -8,22 +8,21 @@ const username = ref('');
 const password = ref('');
 const confirmPassword = ref('');
 
-const createUser = useUserStore();
+const createUser = usePocketStore();
 
 
 
-  const formCreate = () => {
-    const data = {
-      username: username.value,
-      email: '',
-      emailVisibility: true,
-      password: password.value,
-      passwordConfirm: confirmPassword.value,
-    };
-    createUser.updatestate(data);
-    createUser.newUser(data);
+const formCreate = () => {
+  const data = {
+    username: username.value,
+    email: '',
+    emailVisibility: true,
+    password: password.value,
+    passwordConfirm: confirmPassword.value,
+  };
+  createUser.registerUser(data);
 
-  }
+}
 
 
 
