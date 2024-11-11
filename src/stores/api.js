@@ -23,7 +23,6 @@ export const usePocketStore = defineStore('pbConnection', {
                 const login = await pb.collection('users').authWithPassword(username, password);
                 this.isAthenticated = true;
                 this.token = pb.authStore.token;
-                this.logout();
                 console.log(this.token);
             } catch (error) {
                 console.error(error);
@@ -56,8 +55,8 @@ export const usePocketStore = defineStore('pbConnection', {
             console.log(auth);
         },
 
-        async getBlogs(){
-
+        async getBlogs(blog){
+            const newBlog = pb.collection('blogs').create(blog)
         },
 
         async createBlog() {
