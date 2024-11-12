@@ -20,18 +20,32 @@ const wordCount = computed(() => {
   return blogBody.value.length;
 })
 
-
-
-const publishBlog = () => {
-  const data = {
-    "subject": blogSubject.value,
-    "body": blogBody.value,
-    "likes": 0,
-    "auther": pocketstore.$state.userId
-  }
-
-  pocketstore.createBlog(data);
+let imgdata = ref();
+const uploadImage = (e) => {
+  const image = e.target.files[0];
+  imgdata.value = image;
+  console.log(image)
+  // image = image;
+  // const reader = new FileReader();
+  // reader.readAsDataURL(image);
+  // reader.onload = e => {
+  //   this.previewImage = e.target.result;
+  //   console.log(this.previewImage);
+  // }
 }
+
+
+  const publishBlog = () => {
+    const data = {
+      "subject": blogSubject.value,
+      "body": blogBody.value,
+      "likes": 0,
+      "auther": pocketstore.$state.userId,
+      "media": imgdata.value,
+    }
+    console.log(data);
+    pocketstore.createBlog(data);
+  }
 
 </script>
 
@@ -59,11 +73,13 @@ const publishBlog = () => {
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
           d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
       </svg>
+      <input type="file" accept="image/jpeg" @change="(e) => uploadImage(e)">
       <svg class="mr-2 cursor-pointer hover:text-gray-700 border rounded-full p-1 h-7"
         xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
           d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13" />
       </svg>
+      </input>
       <div class="count ml-auto text-gray-400 text-xs font-semibold">{{ wordCount }}/800</div>
     </div>
     <!-- buttons -->
@@ -72,7 +88,7 @@ const publishBlog = () => {
         class="btn border border-gray-300 p-1 px-4 font-semibold cursor-pointer text-gray-500 ml-auto">Cancel</button>
       <button
         class="btn border border-indigo-500 p-1 px-4 font-semibold cursor-pointer text-gray-200 ml-2 bg-indigo-500"
-        type="submit">Post</button>
+        type="submit" @click="publishBlog()">Post</button>
     </div>
   </div>
   <div v-else="" class="heading text-center font-bold text-2xl m-5 text-gray-800"> please login if you want to post!!!

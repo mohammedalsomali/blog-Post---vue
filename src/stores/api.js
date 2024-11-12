@@ -60,7 +60,7 @@ export const usePocketStore = defineStore('pbConnection', {
             const blogs = await pb.collection('blogs').getFullList({
                 sort: '-created',
             })
-            return JSON.stringify(blogs);
+            return blogs;
 
 
         },
