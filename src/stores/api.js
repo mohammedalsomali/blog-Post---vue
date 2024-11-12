@@ -1,5 +1,5 @@
-import {defineStore}  from "pinia";
-import  pocketbase from "pocketbase";
+import { defineStore } from "pinia";
+import pocketbase from "pocketbase";
 
 export const pb = new pocketbase('http://127.0.0.1:8090');
 
@@ -7,23 +7,24 @@ export const usePocketStore = defineStore('pbConnection', {
     state: () => ({
         isAthenticated: false,
         token: null,
-        user: null,
-        }),
+        userId: null,
+        blogs: null,
+    }),
 
-    getters: {
-        isLogedIn: (state) => !!state.token,
-        getUser: (state) => state.user,
-        
-    },
+    // getters: {
+    //     isLogedIn: (state) => !!state.token,
+    //     getUser: (state) => state.user,
+
+    // },
 
     actions: {
-        
-        async login(username, password){
+
+        async login(username, password) {
             try {
                 const login = await pb.collection('users').authWithPassword(username, password);
                 this.isAthenticated = true;
                 this.token = pb.authStore.token;
-                console.log(this.token);
+                this.userId = pb.authStore.model.id;
             } catch (error) {
                 console.error(error);
             }
@@ -31,13 +32,13 @@ export const usePocketStore = defineStore('pbConnection', {
 
 
         async logout() {
-        if(this.isAthenticated){
+            pb.authStore.clear();
             this.isAthenticated = false;
             this.token = null;
             this.user = null;
-            pb.authStore.clear();;
-        }
             
+
+
         },
 
 
@@ -45,8 +46,8 @@ export const usePocketStore = defineStore('pbConnection', {
             const newUser = await pb.collection('users').create(data);
         },
 
-        async updateUserInfo(){
-            if(!this.token){
+        async updateUserInfo() {
+            if (!this.token) {
                 return console.log('user not logedin');
             }
             const auth = await pb.collection('users').authRefresh({
@@ -55,12 +56,18 @@ export const usePocketStore = defineStore('pbConnection', {
             console.log(auth);
         },
 
-        async getBlogs(blog){
-            const newBlog = pb.collection('blogs').create(blog)
+        async getBlogs() {
+            const blogs = await pb.collection('blogs').getFullList({
+                sort: '-created',
+            })
+            return JSON.stringify(blogs);
+
+
         },
 
-        async createBlog() {
-
+        async createBlog(blogData) {
+            const newBlog = await pb.collection('blogs').create(blogData);
+            
         },
 
         async editBlogs() {

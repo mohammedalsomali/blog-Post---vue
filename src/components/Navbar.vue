@@ -27,7 +27,7 @@ watch(
           <router-link :to="{ name: 'Blog' }"> Blog </router-link>
         </a>
       </div>
-      <a  v-if="!islogedin.value" class="text-blue-600 dark:text-blue-500 hover:underline">
+      <a  v-if="!islogedin" class="text-blue-600 dark:text-blue-500 hover:underline">
         <router-link :to="{ name: 'login' }"> Login
         </router-link>
       </a>

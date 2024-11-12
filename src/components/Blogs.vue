@@ -1,19 +1,29 @@
 <script setup>
-import { ref, onMounted } from 'vue'
-import { blogs } from '../stores/publishBlog'
+import { ref, onBeforeMount } from 'vue'
 import { useCounterStore } from '@/stores/counter';
+import { usePocketStore } from '@/stores/api';
 
 const likes = useCounterStore();
+const pocketStore = usePocketStore();
+
+const bl = ref();
+
+onBeforeMount(async () => {
+    const getBlogs = await pocketStore.getBlogs();
+    console.log(getBlogs);
+    
+})
 
 
-const val = ref('');
-console.log(blogs);
+
+
+
 
 </script>
 
 
 <template>
-    <div class="max-w flex flex-col items-center">
+    <!-- <div class="max-w flex flex-col items-center">
         <div class="w-1/2 my-1 bg-white border border- border-gray-200 rounded-lg shadow light:bg-gray-800 light:border-grey-700"
             v-for="blog in blogs">
             <a href="#">
@@ -34,7 +44,7 @@ console.log(blogs);
         </div>
 
 
-    </div>
+    </div> -->
 
 
 </template>
