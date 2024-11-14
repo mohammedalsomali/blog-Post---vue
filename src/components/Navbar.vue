@@ -1,7 +1,7 @@
 <script setup>
 import { usePocketStore } from '@/stores/api';
 import { storeToRefs } from 'pinia';
-import { computed, ref, watch } from 'vue';
+import { ref, watch } from 'vue';
 
 const useStore = usePocketStore();
 const islogedin = ref('');
@@ -10,7 +10,6 @@ const { token } = storeToRefs(useStore)
 watch(
   token,
   () => {
-    console.log(token);
     islogedin.value = token;
   }
 )

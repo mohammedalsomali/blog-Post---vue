@@ -1,11 +1,28 @@
 <script setup>
 import { usePocketStore } from '@/stores/api';
 import { ref } from 'vue'
+import { useRouter } from 'vue-router';
+
 const username = ref('');
 const password = ref('');
 const logininfo = usePocketStore();
-const formSubmitHandeler = () => {
-  logininfo.login(username.value , password.value);
+const router = useRouter();
+
+const formSubmitHandeler = async () => {
+  await logininfo.login(username.value , password.value);
+try {
+  await router.push({ name: 'home'});
+
+} catch (error) {
+  console.log(typeof useRouter())
+  console.log(useRouter())
+  console.error(error)
+  
+}
+  // await router.push({ name: 'home'})
+  
+
+
 }
 
 </script>

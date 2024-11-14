@@ -7,16 +7,15 @@ const likes = useCounterStore();
 const pocketStore = usePocketStore();
 const blogs = ref([]);
 
-const bl = ref('');
 
 onBeforeMount(async () => {
     const getBlogs = await pocketStore.getBlogs();
     getBlogs.forEach((each) => {
         blogs.value.push(each)
-        bl.value = "http://127.0.0.1:8090/api/files/" + each.collectionId + "/" + each.id + "/" + each.media;
         console.log(blogs);
     })
     
+    await pocketStore.updateUserInfo();
     
 })
 
@@ -33,7 +32,7 @@ onBeforeMount(async () => {
         <div class="w-1/2 my-1 bg-white border border- border-gray-200 rounded-lg shadow light:bg-gray-800 light:border-grey-700"
             v-for="blog in blogs">
             <a href="#">
-                <img class="rounded-t-lg" :src="'http://127.0.0.1:8090/api/files/' + blog.collectionId + '/'+ blog.id + '/' + blog.media" alt="" />
+                <img v-if="blog.media" class="rounded-t-lg" :src="'http://127.0.0.1:8090/api/files/' + blog.collectionId + '/'+ blog.id + '/' + blog.media" alt="" />
             </a>
             <div class="p-5">
                 <a href="#">

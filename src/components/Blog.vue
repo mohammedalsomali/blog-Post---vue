@@ -1,12 +1,14 @@
 <script setup>
 import { ref, computed, onMounted } from 'vue'
 import { usePocketStore } from '@/stores/api';
+import { useRouter } from 'vue-router';
 
 
 
 
 const pocketstore = usePocketStore();
 const islogedin = ref('');
+const router = useRouter();
 
 onMounted(() => {
   islogedin.value = pocketstore.$state.token;
@@ -20,32 +22,27 @@ const wordCount = computed(() => {
   return blogBody.value.length;
 })
 
+
 let imgdata = ref();
+//retrieve files that should be added to the blog
 const uploadImage = (e) => {
   const image = e.target.files[0];
   imgdata.value = image;
-  console.log(image)
-  // image = image;
-  // const reader = new FileReader();
-  // reader.readAsDataURL(image);
-  // reader.onload = e => {
-  //   this.previewImage = e.target.result;
-  //   console.log(this.previewImage);
-  // }
+
 }
 
 
-  const publishBlog = () => {
-    const data = {
-      "subject": blogSubject.value,
-      "body": blogBody.value,
-      "likes": 0,
-      "auther": pocketstore.$state.userId,
-      "media": imgdata.value,
-    }
-    console.log(data);
-    pocketstore.createBlog(data);
+const publishBlog = () => {
+  const data = {
+    "subject": blogSubject.value,
+    "body": blogBody.value,
+    "likes": 0,
+    "auther": pocketstore.$state.userId,
+    "media": imgdata.value,
   }
+  pocketstore.createBlog(data);
+  router.push({name: 'home'});
+}
 
 </script>
 
@@ -62,24 +59,7 @@ const uploadImage = (e) => {
 
     <!-- icons -->
     <div class="icons flex text-gray-500 m-2">
-      <svg class="mr-2 cursor-pointer hover:text-gray-700 border rounded-full p-1 h-7"
-        xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-          d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-      </svg>
-      <svg class="mr-2 cursor-pointer hover:text-gray-700 border rounded-full p-1 h-7"
-        xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-          d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-      </svg>
-      <input type="file" accept="image/jpeg" @change="(e) => uploadImage(e)">
-      <svg class="mr-2 cursor-pointer hover:text-gray-700 border rounded-full p-1 h-7"
-        xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-          d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13" />
-      </svg>
-      </input>
+      <input type="file" accept="image/jpeg" @change="(e) => uploadImage(e)"/>
       <div class="count ml-auto text-gray-400 text-xs font-semibold">{{ wordCount }}/800</div>
     </div>
     <!-- buttons -->

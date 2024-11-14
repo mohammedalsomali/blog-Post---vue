@@ -9,13 +9,9 @@ export const usePocketStore = defineStore('pbConnection', {
         token: null,
         userId: null,
         blogs: null,
+        
+        
     }),
-
-    // getters: {
-    //     isLogedIn: (state) => !!state.token,
-    //     getUser: (state) => state.user,
-
-    // },
 
     actions: {
 
@@ -25,6 +21,7 @@ export const usePocketStore = defineStore('pbConnection', {
                 this.isAthenticated = true;
                 this.token = pb.authStore.token;
                 this.userId = pb.authStore.model.id;
+                
             } catch (error) {
                 console.error(error);
             }
@@ -47,6 +44,9 @@ export const usePocketStore = defineStore('pbConnection', {
         },
 
         async updateUserInfo() {
+            if(localStorage.getItem("pocketbase_auth")){
+                this.token = localStorage.getItem("pocketbase_auth");
+            }
             if (!this.token) {
                 return console.log('user not logedin');
             }
@@ -72,7 +72,7 @@ export const usePocketStore = defineStore('pbConnection', {
 
         async editBlogs() {
 
-        }
-
+        },
+        
     }
 });
