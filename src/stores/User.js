@@ -22,9 +22,9 @@ export const useUserStore = defineStore('user', {
 
     actions: {
         updatestate(newData) {
-            console.log(this.data);
+            // console.log(this.data);
             this.data = newData;
-            console.log(this.data);
+            // console.log(this.data);
         },
 
         async newUser(bew) {
@@ -35,7 +35,7 @@ export const useUserStore = defineStore('user', {
                 //// maybe use axios
                 const pb = pocketbase('http://127.0.0.1:8090');
                 const records = await pb.collection('users').create(bew);
-                console.log(records);
+                // console.log(records);
             } catch (error) {
                 console.log(error.response.data.password.message);
             }

@@ -14,8 +14,8 @@ try {
   await router.push({ name: 'home'});
 
 } catch (error) {
-  console.log(typeof useRouter())
-  console.log(useRouter())
+  // console.log(typeof useRouter())
+  // console.log(useRouter())
   console.error(error)
   
 }

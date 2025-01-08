@@ -23,7 +23,7 @@ export const usePocketStore = defineStore('pbConnection', {
                 this.userId = pb.authStore.model.id;
                 
             } catch (error) {
-                console.error(error);
+                console.error(error.data.message);
             }
         },
 
@@ -48,12 +48,12 @@ export const usePocketStore = defineStore('pbConnection', {
                 this.token = localStorage.getItem("pocketbase_auth");
             }
             if (!this.token) {
-                return console.log('user not logedin');
+                return;
             }
             const auth = await pb.collection('users').authRefresh({
                 GET: this.token
             });
-            console.log(auth);
+            // console.log(auth);
         },
 
         async getBlogs() {
@@ -70,7 +70,8 @@ export const usePocketStore = defineStore('pbConnection', {
             
         },
 
-        async editBlogs() {
+        async editBloglikes(data) {
+            const record = await pb.collection('blogs').update('RECORD_ID', data);
 
         },
         
